@@ -17,7 +17,7 @@ function setItems(items){
 
 function addItem(){
     items.unshift({
-        desciption: "",
+        description: "",
         completed: false,
     });
 
@@ -32,13 +32,26 @@ function updateItem(item, key, value){
 }
 
 function refreshList(){ //sort items and update html for new data
+
+    items.sort((a,b) =>{
+        if(a.completed){
+            return 1;
+        }
+        if(b.completed){
+            return -1;
+        }
+        return a.description < b.description ? -1 : 1
+    })
+
+
+
     ITEMS_CONTAINER.innerHTML = "";
     for (const item of items){
         const itemElement = ITEM_TEMPLATE.content.cloneNode(true);
         const desciptionInput = itemElement.querySelector(".item-description");
         const completedInput = itemElement.querySelector(".item-completed");
 
-        desciptionInput.value = item.desciption;
+        desciptionInput.value = item.description;
         completedInput.checked = item.completed;
 
         desciptionInput.addEventListener("change", ()=>{
