@@ -10,12 +10,13 @@
 </head>
 <body>
     <div id="items">
-        <div class="item">
-            <input type="checkbox" class="item-completed">
-            <input type="text" class="item-description" placeholder="To-Do item.">
-        </div>
-        <button id="add">Add Item</button>
     </div>
-    
+        <template id="itemTemplate">
+            <div class="item">
+                <input type="checkbox" class="item-completed">
+                <input type="text" class="item-description" placeholder="To-Do item.">
+            </div>
+        </template>
+        <button id="add">Add Item</button>
 </body>
 </html>
