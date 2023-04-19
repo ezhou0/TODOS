@@ -11,7 +11,8 @@ function getItems(){
 function setItems(items){
     const itemsJson = JSON.stringify(items);
 
-    localStorage.setItems("todo-test" , itemsJson);
+    localStorage.setItem("todo-test" , itemsJson);
+    
 }
 
 function addItem(){
@@ -20,6 +21,12 @@ function addItem(){
         completed: false,
     });
 
+    setItems(items);
+    refreshList();
+}
+
+function updateItem(item, key, value){
+    item[key] = value;
     setItems(items);
     refreshList();
 }
@@ -33,6 +40,14 @@ function refreshList(){ //sort items and update html for new data
 
         desciptionInput.value = item.desciption;
         completedInput.checked = item.completed;
+
+        desciptionInput.addEventListener("change", ()=>{
+            updateItem(item, "description", desciptionInput.value);
+        });
+
+        completedInput.addEventListener("change", ()=>{
+            updateItem(item, "completed", completedInput.checked);
+        });
 
         ITEMS_CONTAINER.append(itemElement);
     }
